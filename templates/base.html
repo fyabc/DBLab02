@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "bootstrap/base.html" %}
+{% block html_attribs %} lang="zh-cn" charset="utf-8" {% endblock %}
+{% block title %} 旅行预订系统Beta版 {% endblock %}
+
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <ul class="nav nav-tabs">
+                    <li role="presentation"><a href="{{ url_for('.mainPage')}}">首页</a></li>
+                    <li role="presentation"><a href="{{ url_for('.signInPage')}}">注册</a></li>
+                    <li role="presentation"><a href="{{ url_for('.loginPage')}}">登录</a></li>
+                    <li role="presentation"><a href="{{ url_for('.queryPage')}}">基本信息查询</a></li>
+                    <li role="presentation"><a href="{{ url_for('.reservePage')}}">预订</a></li>
+                    <li role="presentation"><a href="{{ url_for('.insertPage')}}">插入</a></li>
+                    <li role="presentation"><a href="{{ url_for('.deletePage')}}">删除</a></li>
+                    <li role="presentation"><a href="{{ url_for('.routeQueryPage')}}">路线查询</a></li>
+                    <li role="presentation"><a href="{{ url_for('.customerQueryPage')}}">用户查询</a></li>
+                    <li role="presentation"><a href="{{ url_for('.logoutPage')}}">登出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <body background="../static/pics/background.jpg">
+    </body>
+{% endblock %}

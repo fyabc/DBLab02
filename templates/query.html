@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "utils.html" as utils %}
+{#<link href="../static/alignment.css" type="text/css" rel="stylesheet">#}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block title %}
+    {{ super() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+
+    <h1>请选择要查询的项目：</h1>
+    <h4>请输入要查询的名称，不填为所有</h4>
+    {{ utils.adminWarning(isAdmin) }}
+
+    {{ wtf.quick_form(query, form_type='horizontal', horizontal_columns=('lg', 2, 3)) }}
+
+    {# queryResult is None or a list. #}
+    {% if queryResult != None %}
+        {{ utils.showTable(queryResult, table, '查询结果') }}
+    {% endif %}
+
+
+{% endblock %}

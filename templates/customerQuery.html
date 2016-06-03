@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "utils.html" as utils %}
+
+{% block title %}
+    {{ super() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    {{ utils.adminWarning(isAdmin) }}
+    {% if isAdmin %}
+        <h1>请选择要检查的用户：</h1>
+        <h4>用户ID和用户名填写一项即可。若都填，以用户ID为准</h4>
+        {{ wtf.quick_form(customerQueryForm, form_type='horizontal', horizontal_columns=('lg', 2, 3)) }}
+    {% else %}
+        <form action="" method="post">
+            {{ customerQueryForm.hidden_tag() }}
+            {# classes below are copied from bootstrap/wtf.html. #}
+            <div class="form-group"></div>
+            <div class="col-lg-offset-2 col-lg-3">
+                {{ customerQueryForm.submit(class_='btn btn-default') }}
+            </div>
+        </form>
+    {% endif %}
+
+    {% if results != None %}
+        {{ utils.showTable(results, Reservations, '查询结果') }}
+    {% endif %}
+{% endblock %}

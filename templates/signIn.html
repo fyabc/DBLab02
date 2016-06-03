@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "utils.html" as utils %}
+
+{% block title %}
+    {{ super() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <h1>请输入账号、用户名和密码：</h1>
+    {{ wtf.quick_form(signInForm, form_type='horizontal', horizontal_columns=('lg', 2, 3)) }}
+    {{ utils.showDBError(errorCode) }}
+{% endblock %}

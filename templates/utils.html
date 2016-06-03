@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% macro showFlashMsg() %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }} </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endmacro %}
+
+{% macro showDBError(errorCode) %}
+    {% if errorCode %}
+        {% for message in errorCode.message %}
+            {% if errorCode.code == 0 %}
+                <p style="color: greenyellow; text-indent: 8pc;">{{ message }}</p>
+            {% else %}
+                <p style="color: red; text-indent: 8pc;">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro showTableHead(table) %}
+    <thead>
+        <tr>
+            {% for name in table.columns %}
+{#                {% if name[1] != '密码' %}#}
+                    <th style="text-align: center">
+                        {{ name[1] }}
+                    </th>
+{#                {% endif %}#}
+            {% endfor %}
+        </tr>
+    </thead>
+{% endmacro %}
+
+{% macro showTableBody(queryResult, table) %}
+    <tbody>
+        {% for entity in queryResult %}
+            {% if entity %}
+                <tr>
+                    {% for name in table.columns %}
+                        <td>
+                            {% if name[0] == 'password' %}
+                                ******
+                            {% else %}
+                                {{ entity.__dict__[name[0]] }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+{% endmacro %}
+
+{% macro showTable(queryResult, table, captionName=None) %}
+    <table class="table-bordered table-condensed table-striped" {# can also be used #}
+       style="align-content: center; width: 60%; line-height: 40px; text-align: center; background-color: inherit"
+       align="center">
+    {% if captionName %}
+        <caption style="color: yellowgreen;">{{ captionName }}</caption>
+    {% endif %}
+    {{ showTableHead(table) }}
+    {{ showTableBody(queryResult, table) }}
+    </table>
+{% endmacro %}
+
+{% macro adminWarning(isAdmin) %}
+    {% if not isAdmin %}
+        <h5 style="text-indent: 4em; color: yellowgreen">您不是管理员，所以只能查询或操作本人的信息。</h5>
+    {% endif %}
+{% endmacro %}

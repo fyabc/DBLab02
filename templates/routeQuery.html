@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "utils.html" as utils %}
+
+{% block title %}
+    {{ super() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+
+    <h1>请选择要检查的路线项目：</h1>
+    {{ wtf.quick_form(routeQueryForm, form_type='horizontal', horizontal_columns=('lg', 2, 3)) }}
+    {% if flightsResults != None %}
+        {{ utils.showTable(flightsResults, Flights, '航班查询结果') }}
+    {% endif %}
+
+    {% if hotelsResults != None %}
+        {{ utils.showTable(hotelsResults, Hotels, '宾馆查询结果') }}
+    {% endif %}
+
+    {% if carsResults != None %}
+        {{ utils.showTable(carsResults, Cars, '出租车查询结果') }}
+    {% endif %}
+{% endblock %}

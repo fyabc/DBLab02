@@ -1,0 +1,19 @@
+In[2]: from dbOperations import *
+
+In[15]: Reservations.query.filter(Reservations.customerID == 'fyabc').all()
+Out[15]: [Reservations(customerID=fyabc, reserveType=1, reserveKey=F0101) # reservationID=2]
+In[16]: Reservations.query.filter(Reservations.customerID == 'fyabcd').all()
+Out[16]: []
+In[17]: res = db.session.execute('show tables;')
+
+# filter(TableX.columnY == 'val') <==> filter_by(TableX.columnY = 'val')
+In[22]: Reservations.query.join(Customers).filter(Reservations.customerID == Customers.IDNumber, Customers.customerName == '范阳').all()
+Out[22]: [Reservations(customerID=fyabc, reserveType=1, reserveKey=F0101) # reservationID=2]
+In[23]: Reservations.query.join(Customers).filter(Reservations.customerID == Customers.IDNumber, Customers.customerName == '范阳')
+
+In[28]: db.session.query(Reservations).join(Customers).filter(Reservations.customerID == Customers.IDNumber, Customers.customerName == '范阳')
+Out[28]: <sqlalchemy.orm.query.Query at 0x2766d83b3c8>
+In[29]: db.session.query(Reservations).join(Customers).filter(Reservations.customerID == Customers.IDNumber, Customers.customerName == '范阳').all()
+Out[29]: [Reservations(customerID=fyabc, reserveType=1, reserveKey=F0101) # reservationID=2]
+In[30]: db.session.query(Reservations.reserveKey).join(Customers).filter(Reservations.customerID == Customers.IDNumber, Customers.customerName == '范阳').all()
+Out[30]: [('F0101')]

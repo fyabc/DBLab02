@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "utils.html" as utils %}
+
+{% block title %}
+    {{ super() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    {{ utils.adminWarning(isAdmin) }}
+    <h2>请选择要预订的项目：</h2>
+    {{ wtf.quick_form(reserveForm, form_type='horizontal', horizontal_columns=('lg', 2, 3)) }}
+    <h2>请选择要退订的项目：</h2>
+    {{ wtf.quick_form(unsubscribeForm, form_type='horizontal', horizontal_columns=('lg', 2, 3)) }}
+    {{ utils.showDBError(errorCode) }}
+{% endblock %}

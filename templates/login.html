@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    {{ super() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    {% if current_user.is_authenticated %}
+        <h1 style="text-indent: 4em">登录成功！</h1>
+        {% if not isAdmin %}
+            <h3 style="text-indent: 4em; color: yellowgreen">您不是管理员，只能执行有限的操作。</h3>
+        {% endif %}
+    {% else %}
+        <h1 style="text-indent: 4em;">请输入账号：</h1>
+        {{ wtf.quick_form(loginForm, form_type='horizontal', horizontal_columns=('lg', 2, 2)) }}
+    {% endif %}
+    {% if loginFailed %}
+        <h3 style="text-indent: 4em; color: red">登录失败，请重试！</h3>
+    {% endif %}
+{% endblock %}
