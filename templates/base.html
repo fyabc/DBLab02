@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 {% extends "bootstrap/base.html" %}
+{% block head %}
+    {{ super() }}
+    <link href="../static/background.css" rel="stylesheet">
+{% endblock %}
+
 {% block html_attribs %} lang="zh-cn" charset="utf-8" {% endblock %}
-{% block title %} 旅行预订系统Beta版 {% endblock %}
+{% block title %}
+    旅行预订系统Beta版
+{% endblock %}
 
 {% block navbar %}
     <div class="navbar navbar-inverse" role="navigation">
@@ -25,6 +32,5 @@
 {% endblock %}
 
 {% block content %}
-    <body background="../static/pics/background.jpg">
-    </body>
+    {{ super() }}
 {% endblock %}
